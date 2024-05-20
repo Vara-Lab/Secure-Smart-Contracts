@@ -204,7 +204,7 @@ pub enum QueryReply {
 }
 
 ```
-## 2. Add Query Handling to Program Metadata
+### 2. Add Query Handling to Program Metadata
 
 Incorporate query handling into your smart contract by defining `InOut<Query, QueryReply>` for the `State` in your `ProgramMetadata`. This allows your contract to process queries and return the corresponding results efficiently.
 
@@ -226,7 +226,7 @@ impl Metadata for ProgramMetadata {
 ```
 
 
-## Step 3: Implement Query Handling in the Smart Contract
+### 3. Implement Query Handling in the Smart Contract
 
 Integrate query handling functionality to manage and respond to state inquiries within your smart contract. This involves setting up a function that can receive queries, process them, and send back appropriate replies.
 
