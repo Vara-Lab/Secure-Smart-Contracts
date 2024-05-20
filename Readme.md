@@ -93,28 +93,15 @@ msg::reply(result, 0).expect("Failed to encode or reply with `Result<Event, Erro
 In this step, you will define specific functions within your smart contract to handle actions. These functions will perform validations, update the state, and potentially generate events. Below is an example of how to implement a function that handles a specific action and returns a `Result<Event, Error>`:
 
 ```rust
-fn first_implementation(&mut self, amount: u128) -> Result<Event, Error> {
-    // Validations
-    let source = msg::source();
-    if self.balances.get(&source).unwrap_or(&0) < &amount {
-        return Err(Error::NotEnoughBalance);
-    }
 
-    // Transition State in Main State
-    self.balances
-        .entry(source)
-        .and_modify(|balance| *balance -= amount);
-    self.current_supply -= amount;
-    self.total_supply -= amount;
+impl State {
 
-    // Generate event
-    Ok(Event::FirstCustomEvent {
-        first_field,
-        second_field,
-        third_field,
-    })
+
+    fn first_method(&mut self, amount: u128) -> Result<Event, Error> { } // the output with `Result<Event, Error>`
+
+
+    // More methods...
 }
-
    ```
 
 ## Step 5: Add Input Validations in the Implementations
@@ -122,12 +109,12 @@ fn first_implementation(&mut self, amount: u128) -> Result<Event, Error> {
 Implementing robust input validations is crucial for maintaining the integrity and security of your smart contract. These validations ensure that only valid and authorized actions are processed. Below is an example of adding input validations within a specific function implementation that returns `Result<Event, Error>`:
 
 ```rust
-fn first_implementation(&mut self, amount: u128) -> Result<Event, Error> {
-    // Validations
-    let source = msg::source();
-    if self.balances.get(&source).unwrap_or(&0) < &amount {
-        return Err(Error::NotEnoughBalance);
-    }
+    fn first_method(&mut self, amount: u128) -> Result<Event, Error> {
+         // Validations
+        let source = msg::source();
+        if self.balances.get(&source).unwrap_or(&0) < &amount {
+            return Err(Error::NotEnoughBalance);
+        }
 
     // Additional logic and actions follow...
 }
@@ -139,7 +126,7 @@ fn first_implementation(&mut self, amount: u128) -> Result<Event, Error> {
 In this step, you will learn how to implement a consistent framework for handling validations, state transitions, and events in your smart contract. Consistency in these areas ensures that the contract functions reliably and securely. Below is an example of how to structure these elements within a function:
 
 ```rust
-fn first_implementation(&mut self, amount: u128) -> Result<Event, Error> {
+fn first_method(&mut self, amount: u128) -> Result<Event, Error> {
     // Validations
     let source = msg::source();
     if self.balances.get(&source).unwrap_or(&0) < &amount {
@@ -168,7 +155,7 @@ fn first_implementation(&mut self, amount: u128) -> Result<Event, Error> {
 Admin validations are a crucial security feature for functions in smart contracts that should be restricted to authorized users only. This step involves adding checks to ensure that only admins can execute certain actions. Below is an example of how to integrate admin validations into a function:
 
 ```rust
-fn first_implementation(&mut self, amount: u128) -> Result<Event, Error> {
+fn first_method(&mut self, amount: u128) -> Result<Event, Error> {
     // Admin Validations
     let source = msg::source();
     if !self.admins.contains(&source) {
